@@ -35,6 +35,13 @@
 
 <MainMenu>:
 
+    Background:
+        id:back
+        pos:self.pos
+        size_hint:self.size_hint
+        allow_stretch:self.allow_stretch
+        keep_ratio:self.keep_ratio
+
     Left_Menu:
         id:menu
         pos:self.pos
@@ -137,6 +144,13 @@
 
 <Configuration_Window>:
 
+    Background:
+        id:back
+        pos:self.pos
+        size_hint:self.size_hint
+        allow_stretch:self.allow_stretch
+        keep_ratio:self.keep_ratio
+
 
     ImageButton:
         id:exit_button
@@ -192,12 +206,40 @@
 
 
 
+<Password_Window>:
+
+    Background:
+        id:back
+        pos:self.pos
+        size_hint:self.size_hint
+        allow_stretch:self.allow_stretch
+        keep_ratio:self.keep_ratio
+
+    ImageButton:
+        id:exit_button
+        pos:self.pos
+        size_hint:self.size_hint
+        allow_stretch:True
+        keep_ratio:False
+        source: "picture_lib/exit.png"
+        on_release:root.close_app()
+        canvas.before:
+            PushMatrix
+            Rotate:
+                angle: self.angle
+                origin: self.center
+        canvas.after:
+            PopMatrix
 
 
 
 
 
-
-
+    ConfigPanel:
+        id: config_panel_1
+        pos:self.pos
+        size_hint:self.size_hint
+        allow_stretch: True
+        keep_ratio: False
 
 
