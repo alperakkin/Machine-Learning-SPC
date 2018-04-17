@@ -4,8 +4,6 @@ from kivy.properties import ObjectProperty
 from kivy.animation import Animation
 from kivy.core.window import Window
 import csv
-from kivy.app import App
-
 class AppScreen(FloatLayout):
     app=ObjectProperty(None)
 
@@ -16,6 +14,8 @@ class Password_Window(AppScreen):
             self.init()
             self.ids.back.init()
             self.ids.back.children[0].text =''
+
+
         def set_pos(self, posx, posy):
             return (Window.width * posx, Window.height * posy)
 
@@ -31,13 +31,15 @@ class Password_Window(AppScreen):
             self.ids.exit_button.pos = self.set_pos(.96, 0.94)
             self.ids.exit_button.size_hint = (0.025, 0.042)
 
-
-
-            # Konfigrasyon düğmeleri
+            # #
+            # self.ids.password_panel.init()
+            # # Konfigrasyon düğmeleri
 
             self.ids.config_panel_1.init()
 
-            #
+
+
+
 
 
         def open_window(self, i):
@@ -73,13 +75,12 @@ class Password_Window(AppScreen):
         def connect_device(self):
             print("Cihaza Bağlanıldı")
 
-        def on_touch_down(self, touch):
-            if self.ids.exit_button.collide_point(touch.x, touch.y):
-                self.close_app()
+      
 
 
 
 
-            for i in range(len(self.ids.config_panel_1.children)):
-                if self.ids.config_panel_1.children[i].collide_point(touch.x,touch.y):
-                 self.open_window(i)
+
+
+
+

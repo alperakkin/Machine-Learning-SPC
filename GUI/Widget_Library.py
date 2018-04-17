@@ -347,3 +347,41 @@ class Left_Menu(FloatLayout, ButtonBehavior):
 
     pass
 
+class Password_Check(FloatLayout):
+    def set_pos(self, posx, posy):
+        return (Window.width * posx, Window.height * posy)
+
+
+    def init(self):
+        # Kayıt Düğmeleri ve Input boxlar
+
+        # Yeni
+        self.add_widget(ImageButton(), 0)
+        # Değiştir
+        self.add_widget(ImageButton(), 1)
+        # Sil
+        self.add_widget(ImageButton(), 2)
+        # Güncelle
+        self.add_widget(ImageButton(), 3)
+
+
+        # Kaydet Button
+        for i in range(4):
+            self.children[i].keep_ratio = False
+            self.children[i].allow_stretch = True
+            self.children[i].size_hint = 0.15, 0.05
+            self.children[i].pos = self.set_pos(0.8, 0.8 - i * 0.1)
+            self.children[i].source = "picture_lib/user_"+str(i)+".png"
+
+        self.add_widget(TextInput(),4)
+        self.children[4].size_hint = 0.1, 0.15
+        self.children[4].pos = self.set_pos(0.2,0.7)
+        self.children[4].multiline = False
+        self.children[4].padding_y = 3, 1
+        self.children[4].focus=True
+
+
+
+
+pass
+
