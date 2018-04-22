@@ -4,11 +4,13 @@ Machine Learning &amp; SPC Application with Python for Industrial Manufacturing 
 Works to do:
 
 * Complete GUI for best user experience
-* Create OPC Protocol
-* Create TCP-IP Protocol
-* Create Mod-BUS
-* Create Profi-BUS
-* Create Ether-Cat
-* Create SPC files for each measurement.
-* Create Neural Network for online data
-* Create Neural Network for csv data
+  * Config Screen
+    * Edit User, Delete User
+    * Connection Parameters
+  * Plotting Screen
+    * Connect to OPC server
+    * Read online Data
+    * Plot Data
+    * Make basic SPC & FFT
+    
+
