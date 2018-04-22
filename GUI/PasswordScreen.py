@@ -14,6 +14,10 @@ class Password_Window(AppScreen):
             self.init()
             self.ids.back.init()
             self.ids.back.children[0].text =''
+            self.user=''
+            self.new_record=False
+            self.user_name=[]
+            self.user_password=[]
 
 
         def set_pos(self, posx, posy):
@@ -29,14 +33,34 @@ class Password_Window(AppScreen):
 
             self.ids.exit_button.angle = 0
             self.ids.exit_button.pos = self.set_pos(.96, 0.94)
-            self.ids.exit_button.size_hint = (0.025, 0.042)
+            self.ids.exit_button.size_hint = (0.020, 0.035)
 
             # #
-            # self.ids.password_panel.init()
+            self.ids.password_panel.init()
             # # Konfigrasyon düğmeleri
 
             self.ids.config_panel_1.init()
 
+
+        def do_action(self,i):
+            if i==0:
+                self.read_parameters()
+                if self.user=='admin':
+                    for i in range(len(self.ids.password_panel.children)):
+                        if i>=4:
+                            self.ids.password_panel.children[i].opacity=1
+                            self.new_record=True
+
+            elif i==1: self.ids.back.children[0].text = 'Kayıt Düzenleme'
+            elif i==2: self.ids.back.children[0].text = 'Kayıt Sil'
+            elif i==3:
+
+                if self.new_record==True:
+                    if self.ids.password_panel.children[6].text==self.ids.password_panel.children[8].text:
+                        self.create_user()
+                        self.ids.back.children[0].text = 'Yeni Kayıt Girişi Gerçekleşti!'
+                    else:
+                        self.ids.back.children[0].text = 'Girdiğiniz Tekrar Şifresi, Şifrenizden Farklı!'
 
 
 
@@ -51,16 +75,31 @@ class Password_Window(AppScreen):
                  self.read_parameters()
 
         def create_user(self):
-            with open('Data/password.dtf', 'w') as csvfile:
-                writer = csv.writer(csvfile, delimiter=',')
+            with open('Data/password.dtf', 'r') as csvfile:
+                reader = csv.DictReader(csvfile, delimiter=',')
+                for row in reader:
+
+                    self.user_name.append(row['Kullanici'])
+                    self.user_password.append(row['Sifre'])
+
+                self.user_name.append(self.ids.password_panel.children[4].text)
+                self.user_password.append(self.ids.password_panel.children[6].text)
+
+            with open('Data/password.dtf', 'w',newline='') as csvfile:
+                fieldnames=['Kullanici','Sifre']
+                writer = csv.DictWriter(csvfile, delimiter=',',fieldnames=fieldnames)
+                writer.writeheader()
+                for i in range(len(self.user_name)):
+                 writer.writerow({'Kullanici': self.user_name[i], 'Sifre': self.user_password[i]})
 
         def read_parameters(self):
             with open('Data/parameters.dtf', 'r') as csvfile:
                 reader = csv.DictReader(csvfile, delimiter=',')
                 for row in reader:
-                    self.ids.back.children[0].pos = self.set_pos(0.3, -0.005)
-                    self.ids.back.children[0].text= ' Bu bölüme girebilmeniz için <admin> olmanız gerekmektedir. Kullanıcı:  '+ row['Parametre']
-
+                    if row['Fonksiyon']=='Kullanici':
+                        self.ids.back.children[0].pos = self.set_pos(0.3, -0.005)
+                        self.ids.back.children[0].text= ' Bu bölüme girebilmeniz için <admin> olmanız gerekmektedir. Kullanıcı:  '+ row['Parametre']
+                        self.user=row['Parametre']
 
 
         def x_app(self, *args):
@@ -75,7 +114,7 @@ class Password_Window(AppScreen):
         def connect_device(self):
             print("Cihaza Bağlanıldı")
 
-      
+
 
 
 

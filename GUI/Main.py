@@ -48,9 +48,9 @@ class OpenDialog(Popup):
         self.title='Yetkili Girişi'
         self.ids.t1.text='Kullanıcı Adı: '
         self.ids.input.hint_text='Kullanıcı adınızı girin...'
-        self.ids.input.font_size=13
+        self.ids.input.font_size=12
         self.ids.t2.text="Şifre: "
-        self.ids.input2.font_size = 13
+        self.ids.input2.font_size = 12
         self.ids.input2.hint_text='Şifrenizi girin...'
     def on_error(self,inst,text):
         if text:
@@ -106,7 +106,7 @@ class MainMenu(AppScreen):
         self.check=False
         self.ids.exit_button.angle = 0
         self.ids.exit_button.pos = self.set_pos(0.96, 0.94)
-        self.ids.exit_button.size_hint = (0.025, 0.042)
+        self.ids.exit_button.size_hint = (0.020, 0.035)
 
         self.ids.menu.init()
 
